@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>INI HOME</title>
+	<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+	<div id="wrapper">
+		<h1>
+			<icon data="ALL_INCLUSIVE" size="50" fill="#f90"></icon>
+			icoen-svg
+		</h1>
+		<div id="list-supported"></div>
+	</div>
+	<div id="tahu"></div>
+<script type="text/javascript" src="assets/js/scripts.js"></script>
+<script type="text/json" src="assets/js/json/icon-data.json"></script>
+<script type="text/javascript">
+	var csvg = new callSVG();
+	csvg.replaceSVG();
+
+	var datas = csvg.getDatas();
+	makeList(datas);
+	function makeList (jsons) {
+		var ul = document.createElement('ul');
+		for (json in jsons) {
+			var li = document.createElement('li');
+			li.innerHTML = csvg.decodeHTML(jsons[json].code) + '\n' + json;
+			document.createTextNode(li);
+			ul.appendChild(li);
+		}
+		document.createTextNode(ul);
+		document.getElementById('list-supported').appendChild(ul);
+	}
+</script>
+</body>
+</html>
