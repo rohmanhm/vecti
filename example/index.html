@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>INI HOME</title>
+	<title>ICOEN-SVG</title>
 	<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
@@ -15,19 +15,18 @@
 		<div id="list-supported"></div>
 	</div>
 	<div id="tahu"></div>
-<script type="text/javascript" src="assets/js/scripts.js"></script>
-<script type="text/json" src="assets/js/json/icon-data.json"></script>
+<script type="text/javascript" src="../icoen-svg.min.js"></script>
 <script type="text/javascript">
-	var csvg = new callSVG();
-	csvg.replaceSVG();
+	var icoen = new icoenSVG();
+	icoen.replaceSVG();
 
-	var datas = csvg.getDatas();
+	var datas = icoen.getDatas();
 	makeList(datas);
 	function makeList (jsons) {
 		var ul = document.createElement('ul');
 		for (json in jsons) {
 			var li = document.createElement('li');
-			li.innerHTML = csvg.decodeHTML(jsons[json].code) + '\n' + json;
+			li.innerHTML = icoen.decodeHTML(jsons[json].code) + '\n' + json;
 			document.createTextNode(li);
 			ul.appendChild(li);
 		}
