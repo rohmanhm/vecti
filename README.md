@@ -28,6 +28,7 @@ Means, call icon favorite with size 60, and outline stroke color `#f98eee`, fill
 ##Customize
 
 You can customize the default action.
+
 ```javascript
 var icoenSVG = new icoenSVG({
 	tagName: 'i', // by default icon
@@ -36,4 +37,9 @@ var icoenSVG = new icoenSVG({
 	stroke: '#000000', // by default none
 });
 ```
+
 And many more, you can see the code.
+
+##Supported icon
+
+We support 845 icon from (Google Icon Design)
