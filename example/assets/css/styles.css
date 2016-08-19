@@ -32,8 +32,8 @@ svg {
 }
 
 #wrapper h1 svg {
-  fill: #fff;
-  height: 80px;
+  /*fill: #fff;*/
+  /*height: 80px;*/
 }
 
 #wrapper ul {
@@ -59,7 +59,7 @@ svg {
 }
 
 #wrapper ul li svg {
-  fill: #bac0c3;
-  width: 25px;
+  /*fill: #bac0c3;*/
+  /*width: 25px;*/
   margin-right: 20px;
 }
