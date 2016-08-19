@@ -9,12 +9,12 @@
 ( function () {
 	'use strict';
 
-	window.callSVG = function (params) {
+	window.icoenSVG = function (params) {
 		var app = this,
             datas = {};
 
 		app.version = '0.0.1';
-        
+
 		app.params = {
 			tagName: 'icon',
 			attributeName: 'data',
