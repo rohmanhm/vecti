@@ -2,6 +2,8 @@
 
 Icoen-SVG is plugin to create vector image in your HTML code with simple code and more customizing.
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=PiSAmveSWi8" target="_blank"><img src="http://img.youtube.com/vi/PiSAmveSWi8/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 ##How to install
 
 Download `icoen-svg` or clone to your local folder.
