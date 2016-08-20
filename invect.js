@@ -40,7 +40,12 @@
             return txt.value;
         }
 
-        app.getJSONData = function () {
+        /**
+         * Get JSON Data from url
+         * @param  {string} urldata Link to JSON Data
+         * @return {object}         Response text
+         */
+        app.getJSONData = function (urldata) {
             if (window.XMLHttpRequest) {
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
