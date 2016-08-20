@@ -40,6 +40,27 @@
             return txt.value;
         }
 
+        app.getJSONData = function () {
+            if (window.XMLHttpRequest) {
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var data = xhr.responseText;
+                        if (typeOf(data) != 'object') {
+                            return JSON.parse(data);
+                        }
+                        return data;
+                    }else{
+                        throw err = 'Failed get data.';
+                    }
+
+                    xhr.open("GET", urldata, true);
+                    xhr.send();
+                }
+            }
+        }
+
         /**
          * Replace Tagname with SVG Icon
          * @return 
