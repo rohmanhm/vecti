@@ -1,6 +1,6 @@
 
 /**
- * ICOEN-SVG | Smarter Vector 
+ * INVECT | Icon for web vector
  * @Creator : Habib Rohman
  * @Date : 17 Agustus 2016
  * 
@@ -9,7 +9,7 @@
 ( function () {
 	'use strict';
 
-	window.icoenSVG = function (params) {
+	window.invect = function (params) {
 		var app = this,
             datas = {};
 

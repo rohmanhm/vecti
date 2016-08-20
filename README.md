@@ -1,24 +1,24 @@
-# ICOEN SVG
+# INVECT
 
-Icoen-SVG is plugin to create vector image in your HTML code with simple code and more customizing.
+invect is plugin to create vector image in your HTML code with simple code and more customizing.
 
-[![Demo ICOEN-SVG](http://img.youtube.com/vi/PiSAmveSWi8/0.jpg)](http://www.youtube.com/watch?v=PiSAmveSWi8)
+[![Demo invect](http://img.youtube.com/vi/PiSAmveSWi8/0.jpg)](http://www.youtube.com/watch?v=PiSAmveSWi8)
 
 ##How to install
 
-Download `icoen-svg` or clone to your local folder.
+Download `invect` or clone to your local folder.
 
->`git clone https://github.com/rohmanhm/icoen-svg.git icoen-svg`
+>`git clone https://github.com/rohmanhm/invect.git invect`
 
-Include file `icoen-svg.min.js` or `icoen-svg.js` to your HTML code.
+Include file `invect.min.js` or `invect.js` to your HTML code.
 
->`<script type="text/javascript" src="icoen-svg/icoen-svg.min.js"></script>`
+>`<script type="text/javascript" src="invect/invect.min.js"></script>`
 
 ##How to use
-First, you must create a new variable to define `icoen-svg` plugin
+First, you must create a new variable to define `invect` plugin
 
 ```javascript
-var icoenSVG = new icoenSVG();
+var invect = new invect();
 ```
 Add to your HTML code 
 `<code data="face"></code>`
@@ -32,7 +32,7 @@ Means, call icon favorite with size 60, and outline stroke color `#f98eee`, fill
 You can customize the default action.
 
 ```javascript
-var icoenSVG = new icoenSVG({
+var invect = new invect({
 	tagName: 'i', // by default icon
 	attributeName: 'icon-name', // by default data
 	fill: '#f98eee', // by default #000000
