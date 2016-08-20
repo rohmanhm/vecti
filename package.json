@@ -1,0 +1,22 @@
+{
+  "name": "invect",
+  "version": "0.0.2",
+  "description": "Icon for web vector",
+  "main": "invect.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohmanhm/icoen-svg.git"
+  },
+  "author": "Habib Rohman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohmanhm/icoen-svg/issues"
+  },
+  "homepage": "https://github.com/rohmanhm/icoen-svg#readme"
+}
