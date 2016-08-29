@@ -8,7 +8,7 @@
 ( function (global) {
     'use strict';
     // Namespace VECTI
-    window.vecti = function (params) {
+    window.Vecti = function (params) {
         var app = this,
             err = new Error(),
             datas = {};
