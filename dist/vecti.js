@@ -145,6 +145,9 @@
          * @return {object}         database SVG Icon
          */
         app.getDatas = function (decoded) {
+            if (datas == {} || datas == undefined){
+                this.init();
+            }
             if (decoded) {
                 return this.decodeHTML(datas);
             }
