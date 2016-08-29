@@ -18,7 +18,7 @@ Include file `vecti.min.js` or `vecti.js` in `dist` path to your HTML code.
 First, you must create a new variable to define `vecti` library
 
 ```javascript
-var vecti = new vecti();
+var vecti = new Vecti();
 ```
 Add to your HTML code 
 `<code data="face"></code>`
@@ -33,7 +33,7 @@ It Means, call your icon with size 60, and outline stroke color `#f98eee`, filli
 You can customize the default action.
 
 ```javascript
-var vecti = new vecti({
+var vecti = new Vecti({
 	tagName: 'i', // by default icon
 	attributeName: 'icon-name', // by default data
 	fill: '#f98eee', // by default #000000
