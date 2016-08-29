@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>INVECT</title>
+	<title>vecti</title>
 	<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 	<div id="wrapper">
 		<h1>
 			<icon data="ALL_INCLUSIVE" size="50" fill="#f90"></icon>
-			invect
+			vecti
 		</h1>
 		<div id="list-supported">
 			<ul>
@@ -29,10 +29,13 @@
 			</ul>
 		</div>
 	</div>
-<script type="text/javascript" src="../invect.min.js"></script>
+<script type="text/javascript" src="/dist/vecti.js"></script>
 <script type="text/javascript">
-	var invect = new invect();
-	invect.replaceSVG();
+	var vecti = new vecti({
+		dataUrl: '../dist/json/data.json'
+	});
+	// Initialization
+	vecti.init();
 </script>
 </body>
 </html>
