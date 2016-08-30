@@ -1,6 +1,6 @@
 /**
  *! Vecti | Vector Image for Web Vector
- * v0.0.3
+ * v0.0.4
  * @Creator : Habib Rohman
  * @Date : 17 Agustus 2016
  */
@@ -10,18 +10,20 @@
     // Namespace VECTI
     window.Vecti = function (params) {
         var app = this,
-            err = new Error(),
-            datas = {};
+            err = new Error();
 
-        app.version = '0.0.3';
+        // Database icon
+        app.db = '';
 
+        // App parameters
         app.params = {
             tagName: 'icon',
             attributeName: 'data',
             size: 32,
+            dataType:'json',
             fill: "#000000",
             stroke: "none",
-            dataUrl: 'json/data.json'
+            dataUrl: 'dist/json/data.json'
         }
 
         // Extend defaults with parameters
@@ -31,14 +33,26 @@
 
         /**
          * Initialization app
+         * @type callback function
          * @return {void}
          */
-        app.init = function () {
-            var app = this;
-            this.getJSONData(app.params.dataUrl, function (res) {
-                datas = res;
-                app.replaceSVG();
-            })
+        app.init = function (callback) {
+            switch(app.params.dataType){
+                case 'json':
+                    app.getJSONData(function (res) {
+                        app.generateSVG(res, function (data) {
+                            app.replaceSVG(data);
+                            callback(data);
+                        });
+                    })  
+                    break;
+                // case 'variable': // Cooming soon
+                //     app.db = data;
+                //     break;
+                default:
+                    throw err.message = 'Data type not supported';
+                    break;
+            }
         }
 
         /**
@@ -57,11 +71,13 @@
          * @param  {string} urldata Link to JSON Data
          * @return {object}         Response text
          */
-        app.getJSONData = function (urldata, callback) {
+        app.getJSONData = function (callback) {
+            var urldata = app.params.dataUrl;
             if (global.XMLHttpRequest) {
                 var xhr = new XMLHttpRequest();
                 
                 xhr.onreadystatechange = function () {
+
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var res = xhr.responseText;
                         if (typeof(res) != 'object') {
@@ -71,21 +87,83 @@
                     }
                 }
 
-                xhr.open("GET", urldata, true);
+                xhr.open("GET", urldata);
                 xhr.send();
             }
         }
 
         /**
-         * Replace Tagname with SVG Icon
-         * @return 
+         * Count JSON as Number
+         * @param  {object} json
+         * @return {number}      countData
          */
-        app.replaceSVG = function () {
-            var tagNames = document.getElementsByTagName(app.params.tagName);
-            if (datas == undefined || datas == {} || datas == ""){
-                this.init();
+        app.countJSON = function (json) {
+            var countData = 0;
+            for (var x in json) {
+                ++countData;
+            }
+            return countData;
+        }
+
+        /**
+         * Generate the SVG icon
+         * @param  {datas}   datas    json icon data
+         * @param  {function} callback 
+         * @return {object}            generated icon svg
+         */
+        app.generateSVG = function (datas, callback) {
+
+            var data,
+                dataIndex = 0,
+                newData = '';
+
+            var countData = app.countJSON(datas);
+
+            for (data in datas) {
+                ++dataIndex;
+                var parser = new DOMParser(),
+                    element;
+
+                element = parser.parseFromString(app.decodeHTML(datas[data].code), 'text/xml').firstChild;
+
+                var size = app.params.size || 32,
+                    fill = app.params.fill || '#000000',
+                    stroke = app.params.stroke || 'none';
+
+                element.setAttribute('width', size);
+                element.setAttribute('height', size);
+                element.setAttribute('fill', fill);
+                element.setAttribute('stroke', stroke);
+                var dbElement,
+                    encodedElement =  app.htmlEntities(element.outerHTML);
+                var lastKoma = ',';
+                if (dataIndex == countData) {
+                    lastKoma = '';
+                } 
+                dbElement = '\"' + data + '\":' + '{ \"code\":\"' + encodedElement + '\"}' + lastKoma;
+                newData += dbElement;
+            }
+
+            var appdb = JSON.parse('{' + newData + '}');
+            app.db = appdb;
+
+            if ( callback ) {
+                callback(appdb);
                 return false;
             }
+
+            return appdb;
+        }
+
+        /**
+         * Replace Tagname with SVG Icon
+         * @type {object} Database icon
+         * @type {function} Callback
+         * @return 
+         */
+        app.replaceSVG = function (datas, callback) {
+
+            var tagNames = document.getElementsByTagName(app.params.tagName);
 
             if (tagNames.length > 0) {
                 var b = tagNames.length - 1;
@@ -100,12 +178,14 @@
                         continue;
                     }
 
-                    element = parser.parseFromString(this.decodeHTML(datas[tagName].code), 'text/xml');
+                    var decodeSVG = this.decodeHTML(datas[tagName].code);
+                    element = parser.parseFromString( decodeSVG , 'text/xml').firstChild;
 
                     if (tagName != undefined) {
                         var size = app.params.size,
                             fill = app.params.fill,
                             stroke = app.params.stroke,
+
                             tagSize = tagNames[b].getAttribute('size'),
                             tagFill = tagNames[b].getAttribute('fill'),
                             tagStroke = tagNames[b].getAttribute('stroke');
@@ -125,17 +205,19 @@
                             stroke = tagStroke;
                         }                        
 
-                        element.firstChild.setAttribute('width', size); // Setting Width SVG
-                        element.firstChild.setAttribute('height', size); // Setting Height SVG
-                        element.firstChild.setAttribute('fill', fill); // Setting Fill SVG
-                        element.firstChild.setAttribute('stroke', stroke); // Setting Stroke SVG
-                        tagNames[b].parentElement.replaceChild(element.firstChild , tagNames[b]);
+                        element.setAttribute('width', size); // Setting Width SVG
+                        element.setAttribute('height', size); // Setting Height SVG
+                        element.setAttribute('fill', fill); // Setting Fill SVG
+                        element.setAttribute('stroke', stroke); // Setting Stroke SVG
+
+                        tagNames[b].parentElement.replaceChild(element , tagNames[b]);
 
                         b--;
                     } else {
                         throw err.message = 'Undefined. can\'t found tag name';
                     }
                 }
+                
             }
         }
 
@@ -145,13 +227,22 @@
          * @return {object}         database SVG Icon
          */
         app.getDatas = function (decoded) {
-            if (datas == {} || datas == undefined){
-                this.init();
-            }
+
             if (decoded) {
-                return this.decodeHTML(datas);
+                return this.decodeHTML(app.db);
             }
-            return datas;
+
+            return app.db;
+
+        }
+        
+        /**
+         * Encode HTMLEntities to Element
+         * @param  {object} str Element
+         * @return {String}
+         */
+        app.htmlEntities = function (str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
     }   
