@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>VECTI | Vector Image for Web Vector</title>
+	<link rel="stylesheet" href="docs/css/style.css">
+</head>
+<body>
+	<div id="wrapper">
+		<h1>
+			<icon data="ALL_INCLUSIVE" size="50" fill="red"></icon>
+			VECTI
+		</h1>
+		<div id="list-supported"></div>
+	</div>
+
+	<icon data="flag" size="90"></icon>
+
+<script type="text/javascript" src="../dist/vecti.js"></script>
+<script type="text/javascript">
+	var vecti = new Vecti({
+		size: 32,
+		fill: 'grey',
+		dataUrl: '../dist/json/data.json'
+	});
+
+	vecti.init(function (data) {
+		makeList(data)
+	});
+
+	function makeList (jsons) {
+		var ul = document.createElement('ul');
+		for (json in jsons) {
+			var li = document.createElement('li');
+			li.innerHTML = vecti.decodeHTML(jsons[json].code) + '\n' + json;
+			document.createTextNode(li);
+			ul.appendChild(li);
+		}
+		document.createTextNode(ul);
+		document.getElementById('list-supported').appendChild(ul);
+	}
+</script>
+</body>
+</html>
