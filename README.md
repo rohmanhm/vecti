@@ -20,10 +20,10 @@ First, you must create a new variable to define `vecti` library
 ```javascript
 var vecti = new Vecti();
 ```
-Add to your HTML code 
+Add to your HTML code
 `<code data="face"></code>`
 
-or add something like 
+or add something like
 `<code data="favorite" size="60" stroke="#f98eee" fill="#ffffff"></code>`
 
 It Means, call your icon with size 60, and outline stroke color `#f98eee`, filling shape with `#ffffff` color.
